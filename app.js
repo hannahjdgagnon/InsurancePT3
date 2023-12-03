@@ -1,7 +1,16 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const app = express();
+let express = require("express");
+let mongoose = require("mongoose");
+let bodyParser = require("body-parser");
+let app = express();
+let session = require("express-session");
+let passport = require("passport");
+let passportLocal = require("passport-local");
+let localStrategy = passportLocal.Strategy;
+let flash = require("connect-flash");
+
+//create a user model instance
+let userModel = require("./models/user");
+let User = userModel.User;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -14,33 +23,78 @@ mongoose.connect("mongodb://127.0.0.1:27017/InsuranceProject", {
 });
 
 // Define claim schema (adjust fields as needed)
-const claimSchema = new mongoose.Schema({
+let claimSchema = new mongoose.Schema({
   title: String,
   description: String,
   // Add other fields as needed
 });
 
-const Claim = mongoose.model("Claim", claimSchema);
+let Claim = mongoose.model("Claim", claimSchema);
+
+// set up express session
+app.use(
+  session({
+    secret: "SomeSecret",
+    saveUninitialized: false,
+    resave: false,
+  })
+);
+
+passport.use(User.createStrategy());
+
+// serialize and deserialize the user info
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//initializepassport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//initialize flash
+app.use(flash());
+
+//  the authentication route
+const authRoute = require("./routes/auth");
+app.use("/", authRoute);
+
+const requireAuth = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
 
 // CRUD operations
 // Routes
-app.get("/", (req, res) => {
-  res.render("home");
+app.get("/", (req, res, next) => {
+  res.render("home", {
+    title: "Home",
+    displayName: req.user ? req.user.displayName : "",
+  });
 });
 
-app.get("/services", (req, res) => {
-  res.render("services");
+app.get("/services", (req, res, next) => {
+  res.render("services", {
+    title: "Services",
+    displayName: req.user ? req.user.displayName : "",
+  });
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
+app.get("/about", (req, res, next) => {
+  res.render("about", {
+    title: "About",
+    displayName: req.user ? req.user.displayName : "",
+  });
 });
 
-app.get("/claims", async (req, res) => {
+app.get("/claims", requireAuth, async (req, res, next) => {
   try {
     // Fetch all claims from the database
     const claims = await Claim.find();
-    res.render("claims", { claims });
+    res.render("claims", {
+      displayName: req.user ? req.user.displayName : "",
+      claims,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -48,7 +102,7 @@ app.get("/claims", async (req, res) => {
 });
 
 // Post new claim
-app.post("/claims/submit", async (req, res) => {
+app.post("/claims/submit", requireAuth, async (req, res, next) => {
   const { title, description } = req.body;
   const newClaim = new Claim({ title, description });
 
@@ -62,7 +116,7 @@ app.post("/claims/submit", async (req, res) => {
 });
 
 // Post delete claim
-app.post("/claims/delete/:id", async (req, res) => {
+app.post("/claims/delete/:id", requireAuth, async (req, res, next) => {
   const claimId = req.params.id;
 
   try {
@@ -75,12 +129,15 @@ app.post("/claims/delete/:id", async (req, res) => {
 });
 
 // Get edit claim
-app.get("/claims/edit/:id", async (req, res) => {
+app.get("/claims/edit/:id", requireAuth, async (req, res, next) => {
   const claimId = req.params.id;
 
   try {
     const claim = await Claim.findById(claimId);
-    res.render("edit-claim", { claim });
+    res.render("edit-claim", {
+      displayName: req.user ? req.user.displayName : "",
+      claim,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -88,7 +145,7 @@ app.get("/claims/edit/:id", async (req, res) => {
 });
 
 // Post update claim
-app.post("/claims/update/:id", async (req, res) => {
+app.post("/claims/update/:id", requireAuth, async (req, res, next) => {
   const claimId = req.params.id;
   const { title, description } = req.body;
 
@@ -101,8 +158,11 @@ app.post("/claims/update/:id", async (req, res) => {
   }
 });
 
-app.get("/contact", (req, res) => {
-  res.render("contact");
+app.get("/contact", requireAuth, (req, res, next) => {
+  res.render("contact", {
+    title: "Contact",
+    displayName: req.user ? req.user.displayName : "",
+  });
 });
 
 // Port

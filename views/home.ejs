@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FHM's Insurance</title>
-    <title>Insurance Company</title>
     <link rel="stylesheet" href="/index.css">
 </head>
 <body>
@@ -18,9 +17,23 @@
                 <li><a href="/about">About</a></li>
                 <li><a href="/claims">Claims</a></li>
                 <li><a href="/contact">Contact</a></li>
+
+                <%if(typeof displayName =='string' && displayName) { %>
+                    <li class="navbar-text">
+                    <i class="fas fa-lg fa-user"></i> 
+                    Welcome, <%= displayName%></li>
+                    <li class="nav-item">
+                    <a href="/logout" class="nav-link">
+                    <i class="fas fa-lg fa-sign-out-alt"></i>Logout</a></li>
+                <% } else { %>
+                <li class="nav-item">
+                    <a href="/login" class="nav-link">
+                    <i class="fas fa-lg fa-sign-in-alt"></i>Login</a></li>
+                <% } %>
+
             </ul>
         </nav>
-        </div>
+    </div>
     </header>
 
     <img src="/images/fhmLOGOInsurance.png" alt="Insurance LOGO" style="display: block; margin-left: auto; margin-right: auto; margin-top: 60px;">

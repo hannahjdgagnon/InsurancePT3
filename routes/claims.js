@@ -1,9 +1,18 @@
-const express = require("express");
-const router = express.Router();
-const Claim = require("../models/claimsModel");
+let express = require("express");
+let router = express.Router();
+let mongoose = require("mongoose");
+
+let Claim = require("../models/claimsModel");
+
+function requireAuth(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/login");
+  }
+  next();
+}
 
 // Handle GET request to view claims
-router.get("/", async (req, res) => {
+router.get("/", requireAuth, async (req, res) => {
   try {
     // Fetch all claims from the database
     const claims = await Claim.find();
@@ -16,7 +25,7 @@ router.get("/", async (req, res) => {
 });
 
 // Handle POST request to submit a new claim
-router.post("/submit", async (req, res) => {
+router.post("/submit", requireAuth, async (req, res) => {
   try {
     // Create a new claim instance
     const newClaim = new Claim({
@@ -36,7 +45,7 @@ router.post("/submit", async (req, res) => {
 });
 
 // Handle POST request to delete a claim
-router.post("/delete/:claimId", async (req, res) => {
+router.post("/delete/:claimId", requireAuth, async (req, res) => {
   const claimId = req.params.claimId;
   try {
     // Logic to delete claim data based on claimId
@@ -51,7 +60,7 @@ router.post("/delete/:claimId", async (req, res) => {
 });
 
 // Handle GET request to edit a claim
-router.get("/edit/:claimId", async (req, res) => {
+router.get("/edit/:claimId", requireAuth, async (req, res) => {
   const claimId = req.params.claimId;
   try {
     // Logic to fetch claim data based on claimId

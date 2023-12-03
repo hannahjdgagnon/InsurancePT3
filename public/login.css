@@ -1,0 +1,53 @@
+/* public/index.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #2d2d2d; /* Professional grey background */
+  color: #fff; /* Professional white text color */
+}
+
+header {
+  background-color: #1a1a1a; /* Dark grey header background */
+  padding: 1rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+footer {
+  background-color: #1a1a1a; /* Dark grey footer background */
+  color: #fff;
+  padding: 0.25rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-content {
+  width: 100%; /* Set the width to your desired percentage */
+  margin: 0 auto; /* Center the footer content */
+}
