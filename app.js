@@ -20,6 +20,7 @@ let mongoURI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/InsuranceProject";
 
 // Connect to MongoDB
+console.log("MongoDB Connection String:", mongoURI);
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
