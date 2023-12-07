@@ -16,8 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
+let mongoURI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/InsuranceProject";
+
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/InsuranceProject", {
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
