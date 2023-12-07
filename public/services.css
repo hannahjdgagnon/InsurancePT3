@@ -1,11 +1,11 @@
 /* public/services.css */
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #2d2d2d; /* Professional grey background */
-  color: #fff; /* Professional white text color */
+  background-color: #505050; /* Professional grey background */
+  color: #f0f0f0; /* Professional white text color */
 }
 
 header {
@@ -39,20 +39,27 @@ nav a {
 }
 
 .services-section {
-  padding: 20px;
-  text-align: center; /* Center text in the services section */
+  padding: 60px;
+  text-align: center;
 }
 
 .service {
   border: 1px solid #444;
   padding: 15px;
   margin-bottom: 20px;
-  background-color: #333;
-  color: #fff;
+  background-color: #b9b7b7;
+  color: #000000;
+  border-radius: 5px;
+  margin-top: 30px;
 }
 
 .service h3 {
-  margin-top: 0;
+  margin-top: 5px;
+}
+
+.small-image {
+  max-width: 30px; /* Adjust the value based on your preference */
+  margin-right: 10px;
 }
 
 footer {

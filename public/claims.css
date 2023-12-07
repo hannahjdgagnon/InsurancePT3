@@ -1,11 +1,11 @@
 /* public/claims.css */
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #2d2d2d; /* Professional grey background */
-  color: #fff; /* Professional white text color */
+  background-color: #a0a0a0; /* Professional grey background */
+  color: #000000; /* Professional white text color */
 }
 
 header {
@@ -48,7 +48,7 @@ nav a {
 
 .claim-form,
 .claim-list {
-  width: 100%; /* Set the width to 100% to occupy the full width of the container */
+  width: 100%;
   margin-top: 20px;
   text-align: center; /* Center text in the claim form and list */
 }
@@ -63,20 +63,20 @@ nav a {
 }
 
 .claim-list li {
-  border: 1px solid #444; /* Darker border color */
+  border: 1px solid #2c2c2c;
   margin: 20px 0;
   padding: 20px;
-  background-color: #333; /* Dark background color */
+  background-color: #cfcfcf;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .claim-list button {
-  background-color: #4c87af;
+  background-color: rgb(86, 133, 98);
   color: #fff;
   padding: 5px 10px;
-  margin-top: 10px;
+  margin-top: 5px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -84,7 +84,7 @@ nav a {
 }
 
 .claim-list button:hover {
-  background-color: #78a9ca;
+  background-color: rgb(132, 182, 139);
 }
 
 footer {

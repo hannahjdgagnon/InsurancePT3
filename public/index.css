@@ -1,11 +1,11 @@
 /* public/index.css */
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, Times, "Times New Roman", serif, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #2d2d2d; /* Professional grey background */
-  color: #fff; /* Professional white text color */
+  background-color: #707070;
+  color: #dadada;
 }
 
 header {
@@ -17,6 +17,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
 nav ul {

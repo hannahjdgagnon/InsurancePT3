@@ -1,15 +1,15 @@
 /* public/about.css */
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #2d2d2d; /* Professional grey background */
-  color: #fff; /* Professional white text color */
+  background-color: #a3a3a3; /* Light grey background */
+  color: #333; /* Dark text color for better readability */
 }
 
 header {
-  background-color: #1a1a1a; /* Dark grey header background */
+  background-color: #333; /* Dark header background */
   color: #fff;
   padding: 1rem;
 }
@@ -42,22 +42,26 @@ nav a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 90px; /* Increase padding for better spacing */
+  border: 2px solid #ccc; /* Add border to the section */
+  border-radius: 5px; /* Add border radius for a rounded look */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+  background-color: #fff; /* Add a background color for contrast */
+  margin-top: 90px;
 }
 
 .about-content {
-  max-width: 600px;
+  max-width: 600px; /* Increased maximum width for better readability */
   margin: 0 auto;
-  margin-top: 50px;
-  text-align: center; /* Center text in the about content */
+  margin-top: 25px; /* Adjust margin for better spacing */
+  text-align: justify; /* Justify text for a cleaner look */
 }
 
 footer {
-  background-color: #1a1a1a; /* Dark grey footer background */
+  background-color: #333; /* Dark footer background */
   color: #fff;
-  text-align: left;
-  padding: 0.25rem;
-  text-align: center; /* Center text in the footer */
+  text-align: center;
+  padding: 1rem;
   position: fixed;
   bottom: 0;
   width: 100%;
