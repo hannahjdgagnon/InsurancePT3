@@ -54,7 +54,7 @@ nav a {
   max-width: 600px; /* Increased maximum width for better readability */
   margin: 0 auto;
   margin-top: 25px; /* Adjust margin for better spacing */
-  text-align: justify; /* Justify text for a cleaner look */
+  text-align: center; /* Justify text for a cleaner look */
 }
 
 footer {
