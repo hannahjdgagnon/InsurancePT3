@@ -16,14 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-let mongoURI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/InsuranceProject";
-
-// Connect to MongoDB
-console.log("MongoDB Connection String:", mongoURI);
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+//connect to mongo
+let mongoDB = mongoose.connection;
+let DB = require("./config/db");
+mongoose.connect(DB.URI);
+mongoDB.on("error", console.error.bind(console, "Connection Error"));
+mongoDB.once("open", () => {
+  console.log("Mongo DB is connected");
 });
 
 // Define claim schema (adjust fields as needed)

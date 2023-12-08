@@ -1,11 +1,13 @@
 let mongoose = require("mongoose");
 
-let claimSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  //any other fields
-});
+let claimsModel = mongoose.Schema(
+  {
+    title: String,
+    description: String,
+  },
+  {
+    collection: "claims",
+  }
+);
 
-let Claim = mongoose.model("Claim", claimSchema);
-
-module.exports = Claim;
+module.exports = mongoose.model("claims", claimsModel);
